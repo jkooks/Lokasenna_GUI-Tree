@@ -1,5 +1,9 @@
 # Lokasenna_GUI-Tree
   A tree class for the ReaScript Lokasenna_GUI/Scythe module. It was delevloped for use with Lokasenna_GUI v2 on both Mac (i7) and Windows environments. It works similarily to PyQt's Tree class, as that is what I am most familiar with, but it relies on similar function naming schemes as Lokasenna_GUI and (hopefully) works similarly to what you would expect.
+  
+This was tested on Lokasenna_GUI v2, so I am not sure if it will work in v3. Any feedback on whether or not it does will be appreciated!
+
+version = 0.1.0
 
 
 
