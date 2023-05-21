@@ -8,7 +8,7 @@ end
 
 loadfile(lib_path .. "Core.lua")()
 loadfile(lib_path .. "Classes/Class - Tree.lua")()
-loadfile(lib_path .. "Classes/Class - Label.lua")()
+loadfile(lib_path .. "Classes/Class - Menubar.lua")()
 
 -- If any of the requested libraries weren't found, abort the script.
 if missing_lib then return 0 end
@@ -153,7 +153,7 @@ function ObserveChanges()
 
 	--resizes the GUI if you adjusted the size
 	if (width ~= LAST_W) or (height ~= LAST_H) then
-		ResizeList(width, height)
+		ResizeList()
 		LAST_W, LAST_H = width, height
 	end
 
@@ -167,17 +167,27 @@ end
 
 
 --auto-resizes the list when you adjust the height
-function ResizeList(width, height)
+function ResizeList()
+
 	GUI.elms.ItemTree.w = gfx.w - (GUI.elms.ItemTree.x * 2)
-	GUI.elms.ItemTree.h = gfx.h - (GUI.elms.ItemTree.y * 2) + 50 -- +50 to account for other item positions (label and menubar)
+	GUI.elms.ItemTree.h = gfx.h - (GUI.elms.ItemTree.y * 2) + 20 -- to account for other item positions (menubar)
+
+	GUI.elms.ItemTree.header.w = GUI.elms.ItemTree.w
 
 	GUI.elms.ItemTree:init()
-	GUI.elms.ItemTree:redraw()
+	GUI.elms.ItemTree.header:init()
+
+	GUI.redraw_z[0] = true --global redraw
 
 	return true
 end
 
 
+function DockWindow(dock)
+	-- 1-255 for left, 257-511 for right, 513-1023 for top (513-769 for top left/top, 771-1279 for top right), >1280 for bottom
+	GUI.dock = dock
+	gfx.dock(GUI.dock, 0, 0, GUI.w, GUI.h)
+end
 
 
 
@@ -204,14 +214,26 @@ GUI.name = "Display Selected Items"
 GUI.x, GUI.y, GUI.w, GUI.h = 0, 0, 270, 600
 GUI.anchor, GUI.corner = "mouse", "T"
 
-GUI.no_menu = true
+
+GUI.New("Menu", "Menubar", {
+	z = 5,
+	x = 0,
+	y = 0,
+	h = 20,
+	fullwidth = true,
+	menus = {title = "Dock", options = {{"Left", DockWindow, 1},{"Right", DockWindow, 257},{""},{"Undock", DockWindow, 0}}},
+	col_bg = "tan",
+	col_txt = "lighter",
+	col_over = "red",
+})
+
 
 GUI.New("ItemTree", "Tree", {
     z = 20,
     x = 10,
-    y = 25,
+    y = 45,
     w = 250,
-    h = 565,
+    h = 550,
     header={caption="", alignment=GUI.AlignMode.center|GUI.AlignMode.left},
     is_multi = true,
     is_arrangeable = true,
@@ -231,9 +253,9 @@ GUI.Header.ascending_symbol = "(P) " 	--sorted by position
 GUI.Header.descending_symbol = "(N) "	--sorted by name
 
 
--------------------
------ SIGNALS -----
--------------------
+-----------------------------
+----- Reimplementations -----
+-----------------------------
 
 function GUI.elms.ItemTree:sortitems(sort_order, items)
 
