@@ -3,7 +3,8 @@
 
 # Installation
   In order to install the class, take the "Class - Tree.lua" file and place it along with all of the other Lokasenna_GUI classes, somewhere along the lines of "*Lokasenna_GUI_Path*/Lokasenna_GUI-master/Lokasenna_GUI v2/Library/Classes/". Once you've placed the class file in that location you will be able to load it like any other class after loading the Core file. But in case you need a refresher, that would look something like this:
-  `local lib_path = reaper.GetExtState("Lokasenna_GUI", "lib_path_v2")
+  ```
+  local lib_path = reaper.GetExtState("Lokasenna_GUI", "lib_path_v2")
     if not lib_path or lib_path == "" then
     reaper.MB("Couldn't load the Lokasenna_GUI library. Please run 'Set Lokasenna_GUI v2 library path.lua' in the Lokasenna_GUI folder.", "Whoops!", 0)
     return
@@ -12,13 +13,13 @@
   loadfile(lib_path .. "Core.lua")()
   loadfile(lib_path .. "Classes/Class - Tree.lua")()
   loadfile(lib_path .. "Classes/Class - Label.lua")()
-  `
+  ```
 
 # Getting Started
 
   ## Creating a Tree
   Creating a tree is fairly similar to most (if not all) Lokasenna_GUI class creations - all you need to do is call `GUI.New`, give it a name as the first argument, tell it to create a "Tree" as the second, and pass it either a table to unpack or all of the individual parameters. An example is below, where we create a tree named "NewTree":
-  `
+  ```
   GUI.New("NewTree", "Tree", {
       z = 20,
       x = 10,
@@ -34,7 +35,7 @@
       shadow = true,
       pad = 4,
   })
-  `
+  ```
 
   This will create a new tree element and assign it the proper parameters. Once you initialize it, by calling `GUI.Init()`, and display it, by calling `GUI.Main()`, you will see the tree show up along with all of the other elements.
 
@@ -42,7 +43,7 @@
   Now that you have a basic element, the next step is to add some items. The items of a tree use a class called a "TreeItem", which can added either upon tree creation (pass a table to the "list" paramenter) or post initialization. The only items that are associated with the tree are the top level items (i.e. the items with no parent) - after that every item is parented to a different item, creating the hierarchy and structure that tree GUI elements are known for.
 
   To create a tree that displays all of the items on the selected track, place the following code before creating the tree, and pass the `track_items` table to the list parameter:
-  `
+  ```
   local track_items = {}
 
   for i = 0, reaper.CountTracks(0) - 1 do
@@ -73,7 +74,7 @@
 
       table.insert(track_items, track_item)
   end
-  `
+  ```
 
   What you should now notice is that your tree is populated with TreeItems, with the top layer ones being all of the tracks in your session and the parented items being the media items that are on those tracks! Additionally, this code also associates the track/media item to the respective tree item by using the function `tree_item:setdata()`, so if you ever need to do something within Reaper to the specific object that the tree item represents you can easily get that information by using the variable `tree_TreeItem:data`! More on that later, however. If, you need to remove all of those items, though, you can easily call `GUI.elms.NewTree:clear()` and it will remove all items from the Tree.
 
@@ -81,7 +82,7 @@
   Along with trees and tree items there is also a new element: Headers. By defualt, these place themselves on top of the tree and act as a sort of "caption" for it - telling the user what they are looking at in a nice and clean manner. You can create a header in two ways: by creating a header with `GUI.New("NewHeader", "Header", {caption="My New Header"})` and supplying the header to `Tree:addheader()`, or you can take the easier way of having the tree create the header for you when you create the tree by supplying the "header" argument a table of the parameters you want the new header to have.
 
   To test this out, pass your "NewTree" the following line of code by assigning the "header" key to it:
-`header = {caption="My new header!"}`
+  `header = {caption="My new header!"}`
 
   This should create a header with the following caption at the top of the Tree. By default headers don't do much other than look somewhat nice, but if a tree can be sorted than clicking on them will toggle the sort mode of that tree and sort it either in an ascending or descending view (based off of how `Tree:sortitems()` is handling the sorting).
 
@@ -387,16 +388,16 @@
     : The symbol for when the tree is in a descending sort mode, defaults to "▼"
    
    ## Tables
-    '''
+    ```
     GUI.ClampMode = {
 	    none = 0,
 	    force = 1,
 	    ignore = 2,
     }
-    '''
+    ```
     : Controls how the index of an item in the list is figured out
 
-    '''
+    ```
     GUI.AlignMode = {
 	    left = 0,
 	    horizontal = 1,
@@ -409,7 +410,7 @@
     }
     : Controls position of the text - can be combined with | operator
 
-    '''
+    ```
     GUI.SelectionMode = {
 	    row = 1,		--selecting anywhere on the row selects the item
 	    text = 2,		--only selecting the text selects the item
@@ -417,12 +418,11 @@
     }
     : Controls where you need to click within the tree in order to select an item
 
-    '''
-  
+    ```
     GUI.SortMode = {
 	    ascending = 1,	--a -> z, 1 -> 10
 	    descending = 2, --z -> a, 10 -> 1
 	    ignore = 3,		--don't sort unless specifically told to in script
     }
-    '''
+    ```
     : Controls the order that the Tree is sorts with
