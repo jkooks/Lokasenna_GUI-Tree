@@ -321,7 +321,7 @@ TreeItem:setselectable(*optional boolean* state)
 | Variable | Type | Default Value | Description |
 | -------- | ---- | ------------- | ----------- |
 | Header.caption | string | Empty | The text that the header displays |
-| Header.alignment | GUI.Alignment | GUI.AlignMode.center|GUI.AlignMode.horizontal | The GUI.Alignment that the caption of the header should have. Can use the bitwise `|` operator to pass a vertical and horizontal alignment at the same time |
+| Header.alignment | GUI.AlignMode | GUI.AlignMode.center|GUI.AlignMode.horizontal | The GUI.AlignMode that the caption of the header should have. Can use the bitwise `|` operator to pass a vertical and horizontal alignment at the same time |
 | Header.tree | Tree | nil | The tree that this header is associated with |
 
 ### Functions
@@ -335,7 +335,7 @@ Header:new(*string* name, *number* z, *number* x, *number* y, *number* w, *numbe
 
 **Setters**
 
- Header:setalignment(*GUI.Alignment* alignment)
+ Header:setalignment(*GUI.AlignMode* alignment)
 > Sets the alignment for the caption.
 
 Header:setcaption(*string* caption)
@@ -395,8 +395,8 @@ GUI.AlignMode = {
     left = 0,
     horizontal = 1,
     right = 2,
-
-top = 4,
+    
+    top = 4,
     center = 8,
     bottom = 16,
     ignore = 256,
