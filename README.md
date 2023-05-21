@@ -9,6 +9,8 @@ Any feedback on whether or not the class works is appreciated!
 
 version = 0.1.0
 
+![Display Selected Items.lua Script](/Images/Display Selected Items.png)
+
 
 
 
