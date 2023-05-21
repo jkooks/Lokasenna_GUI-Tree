@@ -389,6 +389,7 @@ GUI.ClampMode = {
 ```
 > Controls how the index of an item in the list is figured out
 
+
 ```
 GUI.AlignMode = {
     left = 0,
@@ -403,6 +404,7 @@ top = 4,
 ```
 > Controls position of the text - can be combined with | operator
 
+
 ```
 GUI.SelectionMode = {
     row = 1,		--selecting anywhere on the row selects the item
@@ -411,6 +413,7 @@ GUI.SelectionMode = {
 }
 ```
 > Controls where you need to click within the tree in order to select an item
+
 
 ```
 GUI.SortMode = {
