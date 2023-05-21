@@ -173,7 +173,7 @@ Tree:clearselection()
 **Setters**
 
 *Header* = Tree:setheader(*Header or table or string* new_header)
-> Sets the passed header/parameters to be the header of the Tree and removes the current one (if there is one). Requires a reinitialization of the tree element, so other things may be lost - must call this manually after creating the header.
+> Sets the passed header/parameters to be the header of the Tree and removes the current one (if there is one). Requires a reinitialization of the tree element, so other things may be lost - must call this manually after creating the header. If reimplementing the header's onmouseup or onmouseup_r functions and the tree is sortable you must do that after tree initialization, as the tree automatically reimplements those functions for sorting capabilities when the header is created.
 
 Tree:setdoubleclickexpand(*boolean* state)
 > Allows the user to expand/collapse parent items by double-clicking on them
