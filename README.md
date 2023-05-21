@@ -6,7 +6,7 @@
 
 
 # Installation
-  In order to install the class, take the "Class - Tree.lua" file and place it along with all of the other Lokasenna_GUI classes, somewhere along the lines of "*Lokasenna_GUI_Path*/Lokasenna_GUI-master/Lokasenna_GUI v2/Library/Classes/". Once you've placed the class file in that location you will be able to load it like any other class after loading the Core file. But in case you need a refresher, that would look something like this:
+  In order to install the class, take the "Class - Tree.lua" file and place it along with all of the other Lokasenna_GUI classes, somewhere along the lines of **"*Lokasenna_GUI_Path*/Lokasenna_GUI-master/Lokasenna_GUI v2/Library/Classes/"**. Once you've placed the class file in that location you will be able to load it like any other class after loading the Core file. But in case you need a refresher, that would look something like this:
   ```
   local lib_path = reaper.GetExtState("Lokasenna_GUI", "lib_path_v2")
     if not lib_path or lib_path == "" then
@@ -49,46 +49,46 @@ This will create a new tree element and assign it the proper parameters. Once yo
 ## Adding TreeItems
 Now that you have a basic element, the next step is to add some items. The items of a tree use a class called a "TreeItem", which can added either upon tree creation (pass a table to the "list" paramenter) or post initialization. The only items that are associated with the tree are the top level items (i.e. the items with no parent) - after that every item is parented to a different item, creating the hierarchy and structure that tree GUI elements are known for.
 
-To create a tree that displays all of the items on the selected track, place the following code before creating the tree, and pass the `track_items` table to the list parameter:
+To create a tree that displays all of the items per track in a session, place the following code before creating the tree and pass the `track_items` table to the list parameter:
 ```
 local track_items = {}
 
 for i = 0, reaper.CountTracks(0) - 1 do
-local track = reaper.GetTrack(0, i)
-local retval, track_name = reaper.GetTrackName(track)
+	local track = reaper.GetTrack(0, i)
+	local retval, track_name = reaper.GetTrackName(track)
 
-local track_item = GUI.TreeItem:new(track_name)
-track_item:setdata(track)
+	local track_item = GUI.TreeItem:new(track_name)
+	track_item:setdata(track)
 
-local items = {}
-for j = 0, reaper.CountTrackMediaItems(track) - 1 do
-  local media_item = reaper.GetTrackMediaItem(track, j)
-  local media_take = reaper.GetActiveTake(media_item)
+	local items = {}
+	for j = 0, reaper.CountTrackMediaItems(track) - 1 do
+		local media_item = reaper.GetTrackMediaItem(track, j)
+		local media_take = reaper.GetActiveTake(media_item)
 
-  if media_take then
-      local name = reaper.GetTakeName(media_take)
+		if media_take then
+			local name = reaper.GetTakeName(media_take)
 
-      local tree_item = GUI.TreeItem:new(name)
-      tree_item:setdata(media_item)
+			local tree_item = GUI.TreeItem:new(name)
+			tree_item:setdata(media_item)
 
-      table.insert(items, tree_item)
-  end
-end
+			table.insert(items, tree_item)
+		end
+	end
 
-if #items > 0 then
-  track_item:addchildren(items)
-end
+	if #items > 0 then
+		track_item:addchildren(items)
+	end
 
-table.insert(track_items, track_item)
+	table.insert(track_items, track_item)
 end
 ```
 
-What you should now notice is that your tree is populated with TreeItems, with the top layer ones being all of the tracks in your session and the parented items being the media items that are on those tracks! Additionally, this code also associates the track/media item to the respective tree item by using the function `tree_item:setdata()`, so if you ever need to do something within Reaper to the specific object that the tree item represents you can easily get that information by using the variable `tree_TreeItem:data`! More on that later, however. If, you need to remove all of those items, though, you can easily call `GUI.elms.NewTree:clear()` and it will remove all items from the Tree.
+What you should now notice is that your tree is populated with TreeItems, with the top layer items being all representing the tracks in your session and the children items being the media items that are on those tracks! Additionally, this code also associates the track/media item to the respective tree item by using the function `tree_item:setdata()`, so if you ever need to do something within Reaper to the specific object that the tree item represents you can easily get that information by using the variable `tree_TreeItem:data`! This is very handy when you don't want to keep track of multiple tables at the same time. If, you need to remove all of those items, though, you can easily call `GUI.elms.NewTree:clear()` and it will remove all items from the Tree.
 
 ## Adding A Header
-Along with trees and tree items there is also a new element> Headers. By defualt, these place themselves on top of the tree and act as a sort of "caption" for it - telling the user what they are looking at in a nice and clean manner. You can create a header in two ways> by creating a header with `GUI.New("NewHeader", "Header", {caption="My New Header"})` and supplying the header to `Tree:addheader()`, or you can take the easier way of having the tree create the header for you when you create the tree by supplying the "header" argument a table of the parameters you want the new header to have.
+Along with trees and tree items there is also a new element> Headers. By defualt, these place themselves on top of the tree and act as a sort of "caption" for it - telling the user what they are looking at in a nice and clean manner. You can create a header in two ways> by creating a header with `GUI.New("NewHeader", "Header", {caption="My New Header"})` and supplying the header to `Tree:setheader()`, or you can take the easier way of having the tree create the header for you when you create the tree by supplying the "header" argument a table of the parameters you want the new header to have (i.e. `Tree:setheader({caption="My New Header"})`.
 
-To test this out, pass your "NewTree" the following line of code by assigning the "header" key to it:
+To test this out, pass your "NewTree" the following line of code by assigning the "header" key to it upon creation:
 `header = {caption="My new header!"}`
 
 This should create a header with the following caption at the top of the Tree. By default headers don't do much other than look somewhat nice, but if a tree can be sorted than clicking on them will toggle the sort mode of that tree and sort it either in an ascending or descending view (based off of how `Tree:sortitems()` is handling the sorting).
@@ -102,7 +102,7 @@ Now that you have all of that done, you should be ready to make a tree of your v
 # Classes
 As mentioned before, this module comes with three classes> Tree, Header, and TreeTreeItem> Each one of these has various variables and functions you can utilize and reimplement, which are listed below. These are only the basic functions that are exposed, so if you are looking to do more advance things you can take a look at the class functions in the script and read the documentation within the file. Most of those functions have to do with the rendering/drawing, but have at them if they might be of use.
 
-**And as a general note, if you see something like "*type(s)*" below (i.e. "*TreeItem(s)*") it means you can either pass a single instance of that type or a table of them and the function can handle either case. And if you see "*TreeItems*" that just means a table of tree items.**
+**As a general note, if you see something like "*type(s)*" below (i.e. "*TreeItem(s)*") it means you can either pass a single instance of that type or a table of them and the function can handle either case. And if you see "*TreeItems*" that just means a table of tree items.**
 
 
 ## Tree Class
