@@ -130,10 +130,12 @@ As mentioned before, this module comes with three classes> Tree, Header, and Tre
 
 ### Functions
 
+
 **Creation**
 
 Tree:new(*string* name, *number* z, *number* x, *number* y, *number* w, *number* h, *table* list, *Header* header, *string* caption, *number* pad)
 > Used to create a new Tree. Assigns the tree name to "name" and the other parameters to their defaults, unless a table is passed as the second element with the keys being the various parameters.
+
 
 **Selection**
 
@@ -155,6 +157,7 @@ Tree:selectonly(*TreeItem* item)
 Tree:clearselection()
 > Unselects all selected items.
 
+
 **Parenting**
 
 *table* = Tree:addtoplevelitems(*TreeItem(s)* items, *optional number* index)
@@ -165,6 +168,7 @@ Tree:clearselection()
 
 *table* = Tree:clear()
 > Clears the entire list of TreeItems that were part of the Tree. Returns the top level items that were cleared.
+
 
 **Setters**
 
@@ -195,6 +199,7 @@ Tree:setcurrentsort(*GUI.SortMode* sort_mode)
 Tree:setselectionmode(GUI.SelectionMode)
 > Sets where the user has to click in the GUI in order select the row (either row, text, or text_space)
 
+
 **Helpers**
 
 *string* = Tree:copyitemtext(*TreeItem(s)* items)
@@ -208,6 +213,7 @@ Tree:setselectionmode(GUI.SelectionMode)
 
 *GUI.SortMode* = Tree:togglesortmode()
 > Helper function for `Tree:sortitems` - toggles the `current_sort` and returns the new value.
+
 
 **Signals**
 
@@ -255,7 +261,9 @@ Tree:onselection(*TreeItems* items)
 
 ### Functions
 
+
 **Parenting**
+
 *TreeItems* = TreeItem:addchildren(*TreeItem(s)* children, *optional number* index)
 > Makes the item the parent of the children items. Default is to append them to the bottom of the list, but if index is passed it will add them at that spot in the list.
 
@@ -265,7 +273,9 @@ Tree:onselection(*TreeItems* items)
 *TreeItems* = TreeItem:clearchildren()
 > Removes all children items from being parented to the item.
 
+
 **Setters**
+
 *object* = TreeItem:setdata(*optional object* data)
 > The information that the item is holding on to.
 
@@ -290,7 +300,9 @@ TreeItem:setparentable(*optional boolean* state)
 TreeItem:setselectable(*optional boolean* state)
 > If the item is able to be selected by the user or not.
 
+
 **Helpers**
+
 *number* = TreeItem:getindex(*TreeItem* child)
 > Returns the index that the child is in in the parent's children
 
@@ -314,18 +326,24 @@ TreeItem:setselectable(*optional boolean* state)
 
 ### Functions
 
+
 **Creation**
+
 Header:new(*string* name, *number* z, *number* x, *number* y, *number* w, *number* h, *string* caption, *number* alignment, *GUI.Tree* tree, *GUI.Font* text_font, *GUI.Font* symbol_font, *GUI.Color* color, *GUI.Color* bg)
 > Used to create a new Header. Assigns the header name to "name" and the other parameters to their defaults, unless a table is passed as the second element with the keys being the various parameters.
 
+
 **Setters**
+
  Header:setalignment(*GUI.Alignment* alignment)
 > Sets the alignment for the caption.
 
 Header:setcaption(*string* caption)
 > Sets the text to the provided caption.
 
+
 **Signals**
+
 The Header class has access to all normal signals/"on" functions that the usual GUI class have access to, including `ondoubleclick`, `onmousedown`, etc. It does make use of `onmouseup` to control sorting of the tree, however, so be careful if you reimplement that function.
 
 
@@ -333,9 +351,11 @@ The Header class has access to all normal signals/"on" functions that the usual 
 
 
 # Other Things
+
 This script comes with some other useful functions, or tables with set values that mean something to the classes.
 
 ## Functions
+
 *string* = GUI.EscapeString(*string* str)
 > Returns a string with all special characters escaped.
 
@@ -351,17 +371,13 @@ This script comes with some other useful functions, or tables with set values th
 ## Symbols
 Various symbols, such as the expanded/collapsed symbol or the sorting symbols, can be changed if you assign them before creating the tree or headers. They all take string values.
 
-GUI.Tree.indent
-> The indent of each TreeItem depth, defaults to 4 spaces
-GUI.Tree.expanded_symbol
-> The symbol you want the parent item to have when expanded, defaults to "▼"
-GUI.Tree.collapsed_symbol
-> The symbol you want the parent item to have when collapsed, defaults to "►"
-
-Header.ascending_symbol
-> The symbol for when the tree is in an ascending sort mode, defaults to "▲"	
-Header.descending_symbol
-> The symbol for when the tree is in a descending sort mode, defaults to "▼"
+| Variable | Default Value | Description |
+| -------- | ------------- | ----------- |
+| GUI.Tree.indent | 4 spaces | The indent of each TreeItem depth |
+| GUI.Tree.expanded_symbol | "▼" | The symbol you want the parent item to have when expanded |
+| GUI.Tree.collapsed_symbol | "►" | The symbol you want the parent item to have when collapsed |
+| GUI.Header.ascending_symbol | "▲" | The symbol for when the tree is in an ascending sort mode |
+| GUI.Header.descending_symbol | "▼" | The symbol for when the tree is in a descending sort mode |
 
 ## Tables
 ```
