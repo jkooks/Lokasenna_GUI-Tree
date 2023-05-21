@@ -111,14 +111,11 @@ And as a general note, if you see something like "*type(s)*" below (i.e. "*TreeI
 **These are read-only variables! Please use the appropriate setter functions to set them!**
 
 **Tables**
-Tree.list
-: The items you want to be on the top level, can also be a string but must be in CSV form
-Tree.top_items
-: Holds the top level items in the tree (after initialization)
-Tree.selected_items
-: Holds all the items that are currently selected
-Tree.showing_items
-: Holds the items that are currently displayed in the window
+|Variable|Definition|
+|Tree.list|The items you want to be on the top level, can also be a string but must be in CSV form|
+|Tree.top_items|Holds the top level items in the tree (after initialization)|
+|Tree.selected_items|Holds all the items that are currently selected|
+|Tree.showing_items|Holds the items that are currently displayed in the window|
 
 **Booleans**
 Tree.is_doubleclick_expand
