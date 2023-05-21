@@ -1,9 +1,23 @@
 # Lokasenna_GUI-Tree
-  A tree class for the ReaScript Lokasenna_GUI/Scythe module. It was delevloped for use with Lokasenna_GUI v2 on both Mac (i7) and Windows environments. It works similarily to PyQt's Tree class, as that is what I am most familiar with, but it relies on similar function naming schemes as Lokasenna_GUI and (hopefully) works similarly to what you would expect.
-  
-This was tested on Lokasenna_GUI v2, so I am not sure if it will work in v3. Any feedback on whether or not it does will be appreciated!
+A tree class for the ReaScript Lokasenna_GUI/Scythe module. 
+
+As the bulk of this code was ported and modified from the Listbox class, and only works due to the core Lokasenna_GUI functionality, the least I can do is say a huge thanks to Lokasenna, as Reaper would have a lot worse looking GUIs if this API was never made. Glad I could help contribute to it in some way, even if the class isn't used too often.
+
+This was developed using on Lokasenna_GUI v2, so I am not sure if it will work in v3. It was tested on both Mac (i7) and Windows environments. Fundamentally it works similarily to PyQt's Tree class, as that is what I am most familiar with, but it relies on similar function naming schemes as Lokasenna_GUI and (hopefully) works similarly to what you would expect.
+
+Any feedback on whether or not the class works is appreciated!
 
 version = 0.1.0
+
+
+
+
+
+# Licensing/Updates
+Do what you want with these files, but feel free to let me know what cool stuff you make with the class! And if you want to include my name in it that would also be cool, but that isn't a requirement.
+
+Can't guarantee that I am going to update this often, but if anyone wants to fix some bugs or add additional features feel free to 
+submit some pull requests and I can integrate them.
 
 
 
