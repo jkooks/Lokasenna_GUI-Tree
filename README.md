@@ -131,10 +131,12 @@ As mentioned before, this module comes with three classes> Tree, Header, and Tre
 ### Functions
 
 **Creation**
+
 Tree:new(*string* name, *number* z, *number* x, *number* y, *number* w, *number* h, *table* list, *Header* header, *string* caption, *number* pad)
 > Used to create a new Tree. Assigns the tree name to "name" and the other parameters to their defaults, unless a table is passed as the second element with the keys being the various parameters.
 
 **Selection**
+
 Tree:selectrange(*TreeItem* item1, *TreeItem* item2, *bool* state)
 > Changes all items from the first item to the second item to the selection state that is passed.
 
@@ -154,6 +156,7 @@ Tree:clearselection()
 > Unselects all selected items.
 
 **Parenting**
+
 *table* = Tree:addtoplevelitems(*TreeItem(s)* items, *optional number* index)
 > Adds the TreeItems passed to the top, base layer of the list. If index is provided it places them at that spot of the list, otherwise appends them to the end. Returns table of items that were added on success.
 
@@ -164,6 +167,7 @@ Tree:clearselection()
 > Clears the entire list of TreeItems that were part of the Tree. Returns the top level items that were cleared.
 
 **Setters**
+
 *Header* = Tree:setheader(*Header or table or string* new_header)
 > Sets the passed header/parameters to be the header of the Tree and removes the current one (if there is one). Requires a reinitialization of the tree element, so other things may be lost - must call this manually after creating the header.
 
@@ -192,6 +196,7 @@ Tree:setselectionmode(GUI.SelectionMode)
 > Sets where the user has to click in the GUI in order select the row (either row, text, or text_space)
 
 **Helpers**
+
 *string* = Tree:copyitemtext(*TreeItem(s)* items)
 > Writes the text of all the items passed to the clipboard, with each item's text separated by a new line. By default, every tree can do this when you hit the `Cntrl + c` key. **Need SWS for this functionality.**
 
@@ -205,6 +210,7 @@ Tree:setselectionmode(GUI.SelectionMode)
 > Helper function for `Tree:sortitems` - toggles the `current_sort` and returns the new value.
 
 **Signals**
+
 All of these signals/functions can be reimplementable if you would like specific things to occur when they happen. They are additional ones to the usual that Lokasenna_GUI provides.
 
 Tree:onitemadd(*TreeItems* items)
