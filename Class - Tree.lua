@@ -248,12 +248,6 @@ function GUI.Tree:new(name, z, x, y, w, h, list, header, caption, pad)
 
 	tree.needs_format = false --lets the tree know it needs to re-format the list
 
-	--ADDED: Used for the auto resize functionality
-	tree.w_scale = tree.w/GUI.w
-	tree.x_scale = tree.x/GUI.w
-	tree.h_scale = tree.h/GUI.h
-	tree.y_scale = tree.y/GUI.h
-
 	GUI.redraw_z[tree.z] = true
 
 	setmetatable(tree, self)
