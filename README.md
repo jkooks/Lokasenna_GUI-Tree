@@ -163,8 +163,8 @@ Tree:clearselection()
 *table* = Tree:addtoplevelitems(*TreeItem(s)* items, *optional number* index)
 > Adds the TreeItems passed to the top, base layer of the list. If index is provided it places them at that spot of the list, otherwise appends them to the end. Returns table of items that were added on success.
 
-*table* = Tree:removetoplevelitems(*TreeItem(s)* items)
-> Removes the TreeItems if they are on the top, base layer of the list
+*table* = Tree:removetoplevelitems(*TreeItem(s) or number* items)
+> Removes the TreeItems if they are on the top, base layer of the list. Can be passed a table of TreeItems, a single TreeItem, or a number. If passed a number it will remove the item at that index in the top_items table.
 
 *table* = Tree:clear()
 > Clears the entire list of TreeItems that were part of the Tree. Returns the top level items that were cleared.
@@ -267,8 +267,8 @@ Tree:onselection(*TreeItems* items)
 *TreeItems* = TreeItem:addchildren(*TreeItem(s)* children, *optional number* index)
 > Makes the item the parent of the children items. Default is to append them to the bottom of the list, but if index is passed it will add them at that spot in the list.
 
-*TreeItems* = TreeItem:removechildren(*TreeItem(s)* children)
-> Removes the items as children items of the TreeItem.
+*TreeItems* = TreeItem:removechildren(*TreeItem(s) or number* children)
+> Removes the items as children items of the TreeItem. Can be passed a table of TreeItems, a single TreeItem, or a number. If passed a number, it will remove the item in that index of the children table.
 
 *TreeItems* = TreeItem:clearchildren()
 > Removes all children items from being parented to the item.
