@@ -171,15 +171,16 @@ Tree:clearselection()
 
 
 **Setters**
+**All of these (with the exception of `setheader`) return `true` on success.**
 
 *Header* = Tree:setheader(*Header or table or string* new_header)
 > Sets the passed header/parameters to be the header of the Tree and removes the current one (if there is one). Requires a reinitialization of the tree element, so other things may be lost - must call this manually after creating the header. If reimplementing the header's onmouseup or onmouseup_r functions and the tree is sortable you must do that after tree initialization, as the tree automatically reimplements those functions for sorting capabilities when the header is created.
 
-Tree:setdoubleclickexpand(*boolean* state)
-> Allows the user to expand/collapse parent items by double-clicking on them
-
 Tree:setarrangeable(*boolean* state)
 > Allows the user to re-arrange items by dragging them around
+
+Tree:setdoubleclickexpand(*boolean* state)
+> Allows the user to expand/collapse parent items by double-clicking on them
 
 Tree:setexpandable(*boolean* state)
 > Allows the user to expand parent items
@@ -275,6 +276,7 @@ Tree:onselection(*TreeItems* items)
 
 
 **Setters**
+**All of these return `true` on success.**
 
 *object* = TreeItem:setdata(*optional object* data)
 > The information that the item is holding on to.
@@ -334,6 +336,7 @@ Header:new(*string* name, *number* z, *number* x, *number* y, *number* w, *numbe
 
 
 **Setters**
+**All of these return `true` on success.**
 
  Header:setalignment(*GUI.AlignMode* alignment)
 > Sets the alignment for the caption.
