@@ -222,8 +222,6 @@ GUI.New("Menu", "Menubar", {
 	h = 20,
 	fullwidth = true,
 	menus = {title = "Dock", options = {{"Left", DockWindow, 1},{"Right", DockWindow, 257},{""},{"Undock", DockWindow, 0}}},
-	col_bg = "tan",
-	col_txt = "lighter",
 	col_over = "red",
 })
 
